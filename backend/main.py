@@ -3,24 +3,27 @@ from services.openai_service import OpenAIService
 from services.video_service import create_video_from_image_audio
 from utils.downloader import download_file
 
-def main():
-    user_input = input("Nə yaratmaq istəyirsiniz? Yazın: ")
-
-    # İnterfeyslər
+def main_process(user_text: str) -> str:
+    """
+    İstifadəçinin daxil etdiyi mətni qəbul edir,
+    səsləndirir, şəkil yaradır və videoya montaj edir.
+    """
     openai_service = OpenAIService()
     elevenlabs_service = ElevenLabsService()
 
-    # 1. Səs yaratmaq
-    audio_file = elevenlabs_service.text_to_speech(user_input)
+    print("Səs yaradılır...")
+    audio_file = elevenlabs_service.text_to_speech(user_text)
 
-    # 2. Şəkil yaratmaq
-    image_url = openai_service.generate_image(user_input)
+    print("Şəkil yaradılır...")
+    image_url = openai_service.generate_image(user_text)
     image_file = download_file(image_url, "image.png")
 
-    # 3. Video yaratmaq
+    print("Video yaradılır...")
     video_file = create_video_from_image_audio(image_file, audio_file)
 
-    print(f"\nVideo hazırdır: {video_file}")
+    print(f"Video hazırdır: {video_file}")
+    return video_file
 
 if __name__ == "__main__":
-    main()
+    text = input("Nə yaratmaq istəyirsiniz? Yazın: ")
+    main_process(text)
