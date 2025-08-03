@@ -1,6 +1,7 @@
 __pycache__/
 *.pyc
 .env
-narration.mp3
-image.png
-output_video.mp4
+*.mp3
+*.png
+*.mp4
+tests/test_output.mp4
