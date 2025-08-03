@@ -1,6 +1,9 @@
 import subprocess
 
 def create_video_from_image_audio(image_path: str, audio_path: str, output_path: str = "output_video.mp4") -> str:
+    """
+    FFmpeg ilə şəkil və səsi montaj edib video yaradır.
+    """
     cmd = [
         "ffmpeg",
         "-y",
