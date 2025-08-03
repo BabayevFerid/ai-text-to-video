@@ -2,12 +2,19 @@ import requests
 from backend.config import ELEVENLABS_API_KEY
 
 class ElevenLabsService:
+    """
+    ElevenLabs Text-to-Speech API ilə mətnin səsə çevrilməsi.
+    """
+
     def __init__(self, voice_id="EXAVITQu4vr4xnSDxMaL"):
         self.voice_id = voice_id
         self.api_key = ELEVENLABS_API_KEY
         self.tts_url = f"https://api.elevenlabs.io/v1/text-to-speech/{self.voice_id}"
 
     def text_to_speech(self, text: str, output_file: str = "narration.mp3") -> str:
+        """
+        Verilən mətni səs faylına çevirir və faylı saxlayır.
+        """
         headers = {
             "xi-api-key": self.api_key,
             "Content-Type": "application/json"
